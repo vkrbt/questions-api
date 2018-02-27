@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/vkrbt/questions-and-answers-api#readme",
   "dependencies": {
+    "jsonwebtoken": "^8.1.1",
     "koa": "^2.5.0",
     "koa-jwt": "^3.3.0",
     "pg": "^7.4.1",
