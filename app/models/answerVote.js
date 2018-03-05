@@ -1,31 +1,32 @@
-const { INTEGER, TEXT, DATE } = require('sequelize');
+const { INTEGER, BOOLEAN } = require('sequelize');
 const User = require('./user');
-const Question = require('./question');
+const Answer = require('./answer');
 const sequelize = require('../db');
 
-const Answer = sequelize.define('answer', {
+const AnswerVote = sequelize.define('answer_vote', {
   id: {
     type: INTEGER,
     primaryKey: true,
     autoIncrement: true,
   },
-  text: TEXT,
-  authorId: {
+  userId: {
     type: INTEGER,
     references: {
       model: User,
       key: 'id',
     },
   },
-  questionId: {
+  answerId: {
     type: INTEGER,
     references: {
-      model: Question,
+      model: Answer,
       key: 'id',
     },
   },
-  createDate: DATE,
-  updateDate: DATE,
+  isUpvote: {
+    type: BOOLEAN,
+    defaultValue: true,
+  },
 });
 
-module.exports = Answer;
+module.exports = AnswerVote;

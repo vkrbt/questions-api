@@ -1,21 +1,15 @@
+require('dotenv').config();
 const Koa = require('koa');
-
-const sequelize = require('./db');
-const { PORT } = require('./config');
+const bodyParser = require('koa-bodyparser');
+const routes = require('./routes');
 
 const app = new Koa();
+app.use(bodyParser());
 
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log('Connection has been established successfully.');
-  })
-  .catch((err) => {
-    console.error('Unable to connect to the database:', err);
-  });
+app.use(routes.routes());
 
-const server = app.listen(PORT, () => {
-  console.log(`App listening on ${PORT} port`);
+const server = app.listen(process.env.PORT, () => {
+  console.log(`App listening on ${process.env.PORT} port`);
 });
 
 module.exports = server;

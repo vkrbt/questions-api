@@ -1,24 +1,29 @@
-const Sequelize = require('sequelize');
+const {
+  INTEGER,
+  TEXT,
+  DATE,
+  STRING,
+} = require('sequelize');
 const User = require('./user');
 const sequelize = require('../db');
 
 const Question = sequelize.define('question', {
   id: {
-    type: Sequelize.INTEGER,
+    type: INTEGER,
     primaryKey: true,
     autoIncrement: true,
   },
-  title: Sequelize.STRING,
-  description: Sequelize.TEXT,
+  title: STRING,
+  description: TEXT,
   authorId: {
-    type: Sequelize.INTEGER,
+    type: INTEGER,
     references: {
       model: User,
       key: 'id',
     },
   },
-  createDate: Sequelize.DATE,
-  updateDate: Sequelize.DATE,
+  createDate: DATE,
+  updateDate: DATE,
 });
 
 module.exports = Question;

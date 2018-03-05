@@ -1,18 +1,18 @@
-const { INTEGER } = require('sequelize');
-const Tag = require('./user');
+const { INTEGER, BOOLEAN } = require('sequelize');
+const User = require('./user');
 const Question = require('./question');
 const sequelize = require('../db');
 
-const QuestionTag = sequelize.define('question_tag', {
+const AnswerVote = sequelize.define('answer_vote', {
   id: {
     type: INTEGER,
     primaryKey: true,
     autoIncrement: true,
   },
-  tagId: {
+  userId: {
     type: INTEGER,
     references: {
-      model: Tag,
+      model: User,
       key: 'id',
     },
   },
@@ -23,6 +23,10 @@ const QuestionTag = sequelize.define('question_tag', {
       key: 'id',
     },
   },
+  isUpvote: {
+    type: BOOLEAN,
+    defaultValue: true,
+  },
 });
 
-module.exports = QuestionTag;
+module.exports = AnswerVote;

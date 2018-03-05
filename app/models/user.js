@@ -1,13 +1,21 @@
-const Sequelize = require('sequelize');
+const { STRING, BOOLEAN, INTEGER } = require('sequelize');
 const sequelize = require('../db');
 
 const User = sequelize.define('user', {
-  login: {
-    type: Sequelize.STRING,
+  id: {
+    type: INTEGER,
+    autoIncrement: true,
     primaryKey: true,
   },
-  password: Sequelize.STRING,
-  isAdmin: Sequelize.BOOLEAN,
+  login: {
+    type: STRING,
+    unique: true,
+  },
+  password: STRING,
+  isAdmin: {
+    type: BOOLEAN,
+    defaultValue: false,
+  },
 });
 
 module.exports = User;

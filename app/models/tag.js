@@ -1,12 +1,12 @@
-const Sequelize = require('sequelize');
+const { INTEGER, STRING } = require('sequelize');
 const sequelize = require('../db');
 
 const Tag = sequelize.define('tag', {
   id: {
-    type: Sequelize.INTEGER,
+    type: INTEGER,
     primaryKey: true,
   },
-  name: Sequelize.STRING,
+  name: STRING,
 });
 
 module.exports = Tag;
