@@ -11,6 +11,7 @@ const QuestionTag = sequelize.define('question_tag', {
   },
   tagId: {
     type: INTEGER,
+    allowNull: false,
     references: {
       model: Tag,
       key: 'id',
@@ -18,6 +19,7 @@ const QuestionTag = sequelize.define('question_tag', {
   },
   questionId: {
     type: INTEGER,
+    allowNull: false,
     references: {
       model: Question,
       key: 'id',

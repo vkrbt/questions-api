@@ -1,16 +1,18 @@
+const bcrypt = require('bcrypt');
 const User = require('../models/user');
 
 const getAll = async (ctx) => {
-  const users = await User.findAll();
+  const users = await User.all();
   ctx.body = users;
 };
 
 const postRegister = async (ctx) => {
   try {
     const { login, password } = ctx.request.body;
+    const saltedPassword = await bcrypt.hash(password);
     const user = await User.create({
       login,
-      password,
+      password: saltedPassword,
     });
     if (user) {
       ctx.body = {
@@ -40,10 +42,10 @@ const postLogin = async (ctx) => {
     const user = await User.findOne({
       where: {
         login,
-        password,
       },
     });
-    if (user) {
+    const isPasswordCorrect = await bcrypt.compare(password, user.password);
+    if (isPasswordCorrect) {
       ctx.body = {
         message: 'Success!',
       };
@@ -51,7 +53,6 @@ const postLogin = async (ctx) => {
       throw user;
     }
   } catch (err) {
-    console.log(err);
     ctx.status = 400;
     ctx.body = {
       message: 'No such user or password is wrong',

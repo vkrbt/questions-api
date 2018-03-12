@@ -10,8 +10,12 @@ const User = sequelize.define('user', {
   login: {
     type: STRING,
     unique: true,
+    allowNull: false,
   },
-  password: STRING,
+  password: {
+    type: STRING,
+    allowNull: false,
+  },
   isAdmin: {
     type: BOOLEAN,
     defaultValue: false,

@@ -12,6 +12,7 @@ const Answer = sequelize.define('answer', {
   text: TEXT,
   authorId: {
     type: INTEGER,
+    allowNull: false,
     references: {
       model: User,
       key: 'id',
@@ -19,13 +20,20 @@ const Answer = sequelize.define('answer', {
   },
   questionId: {
     type: INTEGER,
+    allowNull: false,
     references: {
       model: Question,
       key: 'id',
     },
   },
-  createDate: DATE,
-  updateDate: DATE,
+  createDate: {
+    type: DATE,
+    allowNull: false,
+  },
+  updateDate: {
+    type: DATE,
+    allowNull: false,
+  },
 });
 
 module.exports = Answer;

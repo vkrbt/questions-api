@@ -14,16 +14,26 @@ const Question = sequelize.define('question', {
     autoIncrement: true,
   },
   title: STRING,
-  description: TEXT,
+  description: {
+    type: TEXT,
+    allowNull: false,
+  },
   authorId: {
     type: INTEGER,
+    allowNull: false,
     references: {
       model: User,
       key: 'id',
     },
   },
-  createDate: DATE,
-  updateDate: DATE,
+  createDate: {
+    type: DATE,
+    allowNull: false,
+  },
+  updateDate: {
+    type: DATE,
+    allowNull: false,
+  },
 });
 
 module.exports = Question;

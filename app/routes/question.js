@@ -1,7 +1,7 @@
 const Question = require('../models/question');
 
 const getAll = async (ctx) => {
-  const questions = await Question.findAll();
+  const questions = await Question.all();
   ctx.body = questions;
 };
 

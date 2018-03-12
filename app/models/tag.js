@@ -6,7 +6,10 @@ const Tag = sequelize.define('tag', {
     type: INTEGER,
     primaryKey: true,
   },
-  name: STRING,
+  name: {
+    type: STRING,
+    allowNull: false,
+  },
 });
 
 module.exports = Tag;

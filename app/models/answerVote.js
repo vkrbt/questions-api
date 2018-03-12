@@ -11,6 +11,7 @@ const AnswerVote = sequelize.define('answer_vote', {
   },
   userId: {
     type: INTEGER,
+    allowNull: false,
     references: {
       model: User,
       key: 'id',
@@ -18,6 +19,7 @@ const AnswerVote = sequelize.define('answer_vote', {
   },
   answerId: {
     type: INTEGER,
+    allowNull: false,
     references: {
       model: Answer,
       key: 'id',
