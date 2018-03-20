@@ -4,6 +4,7 @@ const getAll = async (ctx) => {
   const questions = await Question.all();
   ctx.body = questions;
 };
+exports.getAll = getAll;
 
 const create = async (ctx) => {
   const { title, description } = ctx.request.body;
@@ -16,8 +17,4 @@ const create = async (ctx) => {
   });
   ctx.body = newQuestion;
 };
-
-module.exports = {
-  getAll,
-  create,
-};
+exports.create = create;

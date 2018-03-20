@@ -5,6 +5,8 @@ const getAll = async (ctx) => {
   const users = await User.all();
   ctx.body = users;
 };
+exports.getAll = getAll;
+
 
 const postRegister = async (ctx) => {
   try {
@@ -29,12 +31,11 @@ const postRegister = async (ctx) => {
       };
     } else {
       ctx.status = 500;
-      ctx.body = {
-        message: 'An error has been occured',
-      };
     }
   }
 };
+exports.postRegister = postRegister;
+
 
 const postLogin = async (ctx) => {
   try {
@@ -54,14 +55,6 @@ const postLogin = async (ctx) => {
     }
   } catch (err) {
     ctx.status = 400;
-    ctx.body = {
-      message: 'No such user or password is wrong',
-    };
   }
 };
-
-module.exports = {
-  getAll,
-  postRegister,
-  postLogin,
-};
+exports.postLogin = postLogin;
