@@ -4,8 +4,8 @@ const {
   DATE,
   STRING,
 } = require('sequelize');
-const User = require('./user');
-const sequelize = require('../db');
+const User = require('../user/user.model');
+const sequelize = require('../../db');
 
 const Question = sequelize.define('question', {
   id: {

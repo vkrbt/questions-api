@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const User = require('../models/user');
+const User = require('./user.model');
 
 const getAll = async (ctx) => {
   const users = await User.all();
@@ -9,10 +9,10 @@ const getAll = async (ctx) => {
 const postRegister = async (ctx) => {
   try {
     const { login, password } = ctx.request.body;
-    const saltedPassword = await bcrypt.hash(password);
+    const hashedPassword = await bcrypt.hash(password, +process.env.SALT_ROUNDS);
     const user = await User.create({
       login,
-      password: saltedPassword,
+      password: hashedPassword,
     });
     if (user) {
       ctx.body = {

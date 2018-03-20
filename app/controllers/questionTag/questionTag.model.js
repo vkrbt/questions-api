@@ -1,7 +1,7 @@
 const { INTEGER } = require('sequelize');
-const Tag = require('./user');
-const Question = require('./question');
-const sequelize = require('../db');
+const Tag = require('../user/user.model');
+const Question = require('../question/question.model');
+const sequelize = require('../../db');
 
 const QuestionTag = sequelize.define('question_tag', {
   id: {

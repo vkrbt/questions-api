@@ -1,4 +1,4 @@
-const Question = require('../models/question');
+const Question = require('./question.model');
 
 const getAll = async (ctx) => {
   const questions = await Question.all();

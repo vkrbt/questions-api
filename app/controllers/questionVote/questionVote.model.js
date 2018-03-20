@@ -1,7 +1,7 @@
 const { INTEGER, BOOLEAN } = require('sequelize');
-const User = require('./user');
-const Question = require('./question');
-const sequelize = require('../db');
+const User = require('../user/user.model');
+const Question = require('../question/question.model');
+const sequelize = require('../../db');
 
 const AnswerVote = sequelize.define('answer_vote', {
   id: {

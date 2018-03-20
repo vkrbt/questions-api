@@ -1,5 +1,5 @@
 const { INTEGER, STRING } = require('sequelize');
-const sequelize = require('../db');
+const sequelize = require('../../db');
 
 const Tag = sequelize.define('tag', {
   id: {
