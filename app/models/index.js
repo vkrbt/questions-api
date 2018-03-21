@@ -22,4 +22,5 @@ Object.values(db).forEach((model) => {
   }
 });
 
-sequelize.sync();
+module.exports = db;
+module.exports.sequelize = sequelize;

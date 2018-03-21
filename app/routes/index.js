@@ -1,7 +1,6 @@
 const Router = require('koa-router');
-const question = require('./question.routes');
-const user = require('./user.routes');
-const tag = require('./tag.routes');
+const user = require('./user');
+const question = require('./question');
 
 const router = new Router();
 
@@ -10,18 +9,13 @@ router.get('/', (ctx) => {
     message: 'Welcome!',
   };
 });
-
+router.post('/register', user.register);
+router.post('/login', user.login);
 router.get('/users', user.getAll);
-router.post('/register', user.postRegister);
-router.post('/login', user.postLogin);
 
-router.get('/questions/:id', question.get);
-router.get('/questions', question.getAll);
 router.post('/questions', question.create);
-
-router.get('/tags/:id', tag.get);
-router.get('/tags', tag.getAll);
-router.post('/tags', tag.create);
-router.put('/tags', tag.update);
+router.get('/questions', question.getAll);
+router.get('/questions/:id', question.getById);
+router.patch('/questions/:id', question.update);
 
 module.exports = router;

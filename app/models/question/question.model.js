@@ -6,7 +6,7 @@ module.exports = () => {
   const Question = sequelize.define('question', questionFields, timestampsConfig);
 
   Question.associate = (models) => {
-    models.Question.belongsTo(models.User);
+    Question.belongsTo(models.User);
     models.Question.hasMany(models.Answer);
     models.Question.hasMany(models.QuestionVote);
     models.Question.belongsToMany(models.Tag, { through: 'questionTag' });
