@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const User = require('./user.model');
+const User = require('../models/user/user.model');
 
 const getAll = async (ctx) => {
   const users = await User.all();

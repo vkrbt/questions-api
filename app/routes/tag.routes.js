@@ -1,4 +1,4 @@
-const Tag = require('./tag.model');
+const Tag = require('../models/tag/tag.model');
 
 exports.getAll = async (ctx) => {
   try {
@@ -42,8 +42,22 @@ exports.create = async (ctx) => {
   }
 };
 
-exports.update = () => {
-
+exports.update = async (ctx) => {
+  try {
+    const { id, name } = ctx.request.body;
+    if (id && name) {
+      const tag = await Tag.update({ name }, {
+        where: {
+          id,
+        },
+      });
+      ctx.body = tag;
+    } else {
+      ctx.status = 400;
+    }
+  } catch (err) {
+    ctx.status = 500;
+  }
 };
 
 exports.remove = () => {
