@@ -7,8 +7,8 @@ module.exports = () => {
 
   Question.associate = (models) => {
     Question.belongsTo(models.User);
-    models.Question.hasMany(models.Answer);
-    models.Question.hasMany(models.QuestionVote);
+    models.Question.hasMany(models.Answer, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' });
+    models.Question.hasMany(models.QuestionVote, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' });
     models.Question.belongsToMany(models.Tag, { through: 'questionTag' });
   };
 

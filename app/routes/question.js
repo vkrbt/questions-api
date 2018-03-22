@@ -37,7 +37,6 @@ exports.getById = async (ctx) => {
       ctx.status = 400;
     }
   } catch (err) {
-    console.log(err);
     ctx.status = 500;
   }
 };
@@ -51,6 +50,26 @@ exports.update = async (ctx) => {
     } else {
       ctx.status = 400;
     }
+  } catch (err) {
+    ctx.status = 500;
+  }
+};
+
+exports.upvote = async (ctx) => {
+  try {
+    const { id } = ctx.params;
+    const vote = await Question.vote(id, 1);
+    ctx.body = vote;
+  } catch (err) {
+    ctx.status = 500;
+  }
+};
+
+exports.downvote = async (ctx) => {
+  try {
+    const { id } = ctx.params;
+    const vote = await Question.vote(id, 1, false);
+    ctx.body = vote;
   } catch (err) {
     ctx.status = 500;
   }

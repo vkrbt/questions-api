@@ -17,5 +17,7 @@ router.post('/questions', question.create);
 router.get('/questions', question.getAll);
 router.get('/questions/:id', question.getById);
 router.patch('/questions/:id', question.update);
+router.post('/questions/:id/upvote', question.upvote);
+router.post('/questions/:id/downvote', question.downvote);
 
 module.exports = router;

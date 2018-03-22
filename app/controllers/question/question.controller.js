@@ -1,28 +1,31 @@
-const { Question, User } = require('../../models');
+const { Question, User, QuestionVote } = require('../../models');
 
 const includeUserLogin = {
   include: [{
     model: User,
     attributes: ['login'],
+  }, {
+    model: QuestionVote,
+    attributes: ['isUpvote'],
   }],
 };
 
-module.exports.create = (title, description, userId) => Question.create(
+exports.create = (title, description, userId) => Question.create(
   {
     title,
     description,
     userId,
   },
   {
-    include: User,
+    include: [User],
   },
 );
 
-module.exports.getAll = () => Question.findAll(includeUserLogin);
+exports.getAll = () => Question.findAll(includeUserLogin);
 
-module.exports.getById = id => Question.findById(id, includeUserLogin);
+exports.getById = id => Question.findById(id, includeUserLogin);
 
-module.exports.updateById = (id, question) => {
+exports.updateById = (id, question) => {
   const options = {
     where: {
       id,
@@ -32,3 +35,18 @@ module.exports.updateById = (id, question) => {
   };
   return Question.update(question, options);
 };
+
+exports.vote = (questionId, userId, isUpvote = true) => QuestionVote.upsert(
+  {
+    isUpvote,
+    questionId,
+    userId,
+  },
+  {
+    include: [User, Question],
+  },
+);
+
+exports.delete = questionId => Question
+  .findById(questionId)
+  .then(question => question.destroy());
