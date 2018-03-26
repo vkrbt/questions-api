@@ -74,3 +74,13 @@ exports.downvote = async (ctx) => {
     ctx.status = 500;
   }
 };
+
+exports.delete = async (ctx) => {
+  try {
+    const { id } = ctx.params;
+    const question = await Question.delete(id);
+    ctx.body = question;
+  } catch (err) {
+    ctx.status = 500;
+  }
+};

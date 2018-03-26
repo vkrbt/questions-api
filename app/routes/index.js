@@ -19,5 +19,6 @@ router.get('/questions/:id', question.getById);
 router.patch('/questions/:id', question.update);
 router.post('/questions/:id/upvote', question.upvote);
 router.post('/questions/:id/downvote', question.downvote);
+router.delete('/questions/:id', question.delete);
 
 module.exports = router;
