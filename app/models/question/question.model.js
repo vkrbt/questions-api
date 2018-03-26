@@ -1,10 +1,10 @@
 const sequelize = require('../../db');
 const questionFields = require('./question.fields');
-const timestampsConfig = require('../common/timestamps.config');
+const { hasTimestamp } = require('../common/helpers');
 const { hasManyOptions } = require('../common/helpers');
 
 module.exports = () => {
-  const Question = sequelize.define('question', questionFields, timestampsConfig);
+  const Question = sequelize.define('question', questionFields, hasTimestamp);
 
   Question.associate = (models) => {
     Question.belongsTo(models.User);

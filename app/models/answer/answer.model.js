@@ -1,10 +1,10 @@
 const sequelize = require('../../db');
 const answerFields = require('./answer.fields');
-const timestampsConfig = require('../common/timestamps.config');
+const { hasTimestamp } = require('../common/helpers');
 const { hasManyOptions } = require('../common/helpers');
 
 module.exports = () => {
-  const Answer = sequelize.define('answer', answerFields, timestampsConfig);
+  const Answer = sequelize.define('answer', answerFields, hasTimestamp);
 
   Answer.associate = (models) => {
     models.Answer.hasMany(models.AnswerVote, hasManyOptions);
