@@ -1,7 +1,7 @@
 const sequelize = require('../../db');
 const answerFields = require('./answer.fields');
-const { hasTimestamp } = require('../common/helpers');
-const { hasManyOptions } = require('../common/helpers');
+const { hasTimestamp } = require('../helpers/helpers');
+const { hasManyOptions } = require('../helpers/helpers');
 
 module.exports = () => {
   const Answer = sequelize.define('answer', answerFields, hasTimestamp);

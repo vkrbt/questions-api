@@ -1,6 +1,6 @@
 const sequelize = require('../../db');
 const userFields = require('./user.fields');
-const { hasManyOptions } = require('../common/helpers');
+const { hasManyOptions } = require('../helpers/helpers');
 
 module.exports = () => {
   const User = sequelize.define('user', userFields);

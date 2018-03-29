@@ -1,5 +1,5 @@
 const sequelize = require('../../db');
-const voteFields = require('../common/vote.fields');
+const voteFields = require('../helpers/vote.fields');
 
 module.exports = () => {
   const AnswerVote = sequelize.define('answerVote', voteFields);
