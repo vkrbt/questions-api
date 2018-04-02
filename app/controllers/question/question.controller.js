@@ -1,25 +1,29 @@
 const { Question, User, QuestionVote } = require('../../models');
 
 const includeUserLogin = {
-  include: [{
-    model: User,
-    attributes: ['login'],
-  }, {
-    model: QuestionVote,
-    attributes: ['isUpvote'],
-  }],
+  include: [
+    {
+      model: User,
+      attributes: ['login'],
+    },
+    {
+      model: QuestionVote,
+      attributes: ['isUpvote'],
+    },
+  ],
 };
 
-exports.create = (title, description, userId) => Question.create(
-  {
-    title,
-    description,
-    userId,
-  },
-  {
-    include: [User],
-  },
-);
+exports.create = (title, description, userId) =>
+  Question.create(
+    {
+      title,
+      description,
+      userId,
+    },
+    {
+      include: [User],
+    },
+  );
 
 exports.getAll = () => Question.findAll(includeUserLogin);
 
@@ -36,17 +40,16 @@ exports.updateById = (id, question) => {
   return Question.update(question, options);
 };
 
-exports.vote = (questionId, userId, isUpvote = true) => QuestionVote.upsert(
-  {
-    isUpvote,
-    questionId,
-    userId,
-  },
-  {
-    include: [User, Question],
-  },
-);
+exports.vote = (questionId, userId, isUpvote = true) =>
+  QuestionVote.upsert(
+    {
+      isUpvote,
+      questionId,
+      userId,
+    },
+    {
+      include: [User, Question],
+    },
+  );
 
-exports.delete = questionId => Question
-  .findById(questionId)
-  .then(question => question.destroy());
+exports.delete = questionId => Question.findById(questionId).then(question => question.destroy());

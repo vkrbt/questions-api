@@ -11,7 +11,7 @@ module.exports = () => {
     ],
   });
 
-  QuestionVote.associate = (models) => {
+  QuestionVote.associate = models => {
     models.QuestionVote.belongsTo(models.User);
     models.QuestionVote.belongsTo(models.Question);
   };

@@ -16,7 +16,7 @@ const db = {
   Tag: tag(),
 };
 
-Object.values(db).forEach((model) => {
+Object.values(db).forEach(model => {
   if (model.associate) {
     model.associate(db);
   }

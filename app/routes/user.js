@@ -1,6 +1,6 @@
 const User = require('../controllers/user/user.controller');
 
-exports.register = async (ctx) => {
+exports.register = async ctx => {
   const { login, password } = ctx.request.body;
   const user = await User.create(login, password);
   if (user) {
@@ -12,7 +12,7 @@ exports.register = async (ctx) => {
   }
 };
 
-exports.login = async (ctx) => {
+exports.login = async ctx => {
   const { login, password } = ctx.request.body;
   const user = await User.getByLogin(login);
   const isPasswordCorrect = await User.checkPassword(password, user.password);
@@ -25,7 +25,7 @@ exports.login = async (ctx) => {
   }
 };
 
-exports.getAll = async (ctx) => {
+exports.getAll = async ctx => {
   const users = await User.getAll();
   ctx.body = users;
 };

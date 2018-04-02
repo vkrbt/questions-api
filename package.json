@@ -24,6 +24,7 @@
   "dependencies": {
     "bcrypt": "^1.0.3",
     "dotenv": "^5.0.1",
+    "eslint-config-prettier": "^2.9.0",
     "jsonwebtoken": "^8.1.1",
     "koa": "^2.5.0",
     "koa-bodyparser": "^4.2.0",

@@ -6,7 +6,7 @@ const { hasManyOptions } = require('../helpers/helpers');
 module.exports = () => {
   const Answer = sequelize.define('answer', answerFields, hasTimestamp);
 
-  Answer.associate = (models) => {
+  Answer.associate = models => {
     models.Answer.hasMany(models.AnswerVote, hasManyOptions);
     models.Answer.belongsTo(models.User);
     models.Answer.belongsTo(models.Question);
