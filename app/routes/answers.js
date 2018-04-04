@@ -11,6 +11,16 @@ exports.create = async ctx => {
   }
 };
 
+exports.getById = async ctx => {
+  const { id } = ctx.params;
+  const answers = await Answer.getById(id);
+  if (answers) {
+    ctx.body = answers;
+  } else {
+    ctx.status = 400;
+  }
+};
+
 exports.getAllByQuestionId = async ctx => {
   const { id } = ctx.params;
   const answers = await Answer.getAllByQuestionId(id);
@@ -19,4 +29,19 @@ exports.getAllByQuestionId = async ctx => {
   } else {
     ctx.status = 400;
   }
+};
+
+exports.update = async ctx => {
+  const { id } = ctx.params;
+  const answers = await Answer.updateById(id, ctx.request.body);
+  if (answers) {
+    ctx.body = answers;
+  } else {
+    ctx.status = 400;
+  }
+};
+
+exports.delete = async ctx => {
+  const { id } = ctx.params;
+  ctx.body = await Answer.delete(id);
 };

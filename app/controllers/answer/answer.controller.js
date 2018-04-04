@@ -12,8 +12,24 @@ exports.create = (text, questionId, userId) =>
     },
   );
 
-exports.getAllByQuestionId = (questionId) => Answer.findAll({
-  where: {
-    questionId,
-  }
-});
+exports.getById = id => Answer.findById(id);
+
+exports.getAllByQuestionId = questionId =>
+  Answer.findAll({
+    where: {
+      questionId,
+    },
+  });
+
+exports.updateById = (id, answer) => {
+  const options = {
+    where: {
+      id,
+    },
+    fields: ['text'],
+    returning: true,
+  };
+  return Answer.update(answer, options);
+};
+
+exports.delete = answerId => Answer.findById(answerId).then(answer => answer.destroy());
