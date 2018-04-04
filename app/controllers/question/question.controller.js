@@ -25,7 +25,7 @@ exports.create = (title, description, userId) =>
     },
   );
 
-exports.getAll = () => Question.findAll(includeUserLogin);
+exports.getAll = () => Question.all(includeUserLogin);
 
 exports.getById = id => Question.findById(id, includeUserLogin);
 

@@ -1,6 +1,7 @@
 const Router = require('koa-router');
 const user = require('./user');
 const question = require('./question');
+const answers = require('./answers');
 
 const router = new Router();
 
@@ -16,6 +17,8 @@ router.get('/users', user.getAll);
 router.post('/questions', question.create);
 router.get('/questions', question.getAll);
 router.get('/questions/:id', question.getById);
+router.post('/questions/:id/answers', answers.create);
+router.get('/questions/:id/answers', answers.getAllByQuestionId);
 router.patch('/questions/:id', question.update);
 router.post('/questions/:id/upvote', question.upvote);
 router.post('/questions/:id/downvote', question.downvote);
