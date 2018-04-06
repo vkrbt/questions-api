@@ -1,7 +1,8 @@
 const Router = require('koa-router');
 const user = require('./user');
 const question = require('./question');
-const answers = require('./answers');
+const answer = require('./answer');
+const tag = require('./tag');
 
 const router = new Router();
 
@@ -22,13 +23,15 @@ router.post('/questions/:id/upvote', question.upvote);
 router.post('/questions/:id/downvote', question.downvote);
 router.delete('/questions/:id', question.remove);
 
-router.post('/questions/:id/answers', answers.create);
-router.get('/questions/:id/answers', answers.getAllByQuestionId);
+router.post('/questions/:id/answers', answer.create);
+router.get('/questions/:id/answers', answer.getAllByQuestionId);
 
-router.get('/answers/:id', answers.getById);
-router.patch('/answers/:id', answers.update);
-router.delete('/answers/:id', answers.remove);
-router.post('/answers/:id/upvote', answers.upvote);
-router.post('/answers/:id/doenvote', answers.downvote);
+router.get('/answers/:id', answer.getById);
+router.patch('/answers/:id', answer.update);
+router.delete('/answers/:id', answer.remove);
+router.post('/answers/:id/upvote', answer.upvote);
+router.post('/answers/:id/doenvote', answer.downvote);
+
+router.post('/tag/', tag.create)
 
 module.exports = router;

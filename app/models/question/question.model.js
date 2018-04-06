@@ -10,7 +10,7 @@ module.exports = () => {
     Question.belongsTo(models.User);
     models.Question.hasMany(models.Answer, hasManyOptions);
     models.Question.hasMany(models.QuestionVote, hasManyOptions);
-    models.Question.belongsToMany(models.Tag, { through: 'questionTag' });
+    models.Question.belongsToMany(models.Tag, { through: 'questionTag', ...hasManyOptions });
   };
 
   return Question;
