@@ -20,13 +20,15 @@ router.get('/questions/:id', question.getById);
 router.patch('/questions/:id', question.update);
 router.post('/questions/:id/upvote', question.upvote);
 router.post('/questions/:id/downvote', question.downvote);
-router.delete('/questions/:id', question.delete);
+router.delete('/questions/:id', question.remove);
 
 router.post('/questions/:id/answers', answers.create);
 router.get('/questions/:id/answers', answers.getAllByQuestionId);
 
 router.get('/answers/:id', answers.getById);
 router.patch('/answers/:id', answers.update);
-router.delete('/answers/:id', answers.delete);
+router.delete('/answers/:id', answers.remove);
+router.post('/answers/:id/upvote', answers.upvote);
+router.post('/answers/:id/doenvote', answers.downvote);
 
 module.exports = router;

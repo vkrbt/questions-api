@@ -1,4 +1,5 @@
 const { Question, User, QuestionVote } = require('../../models');
+const { create, remove, update, vote, getByIdWithVotes } = require('../common');
 
 const includeUserLogin = {
   include: [
@@ -14,42 +15,22 @@ const includeUserLogin = {
 };
 
 exports.create = (title, description, userId) =>
-  Question.create(
+  create(
+    Question,
     {
       title,
       description,
       userId,
     },
-    {
-      include: [User],
-    },
+    [User],
   );
 
 exports.getAll = () => Question.all(includeUserLogin);
 
-exports.getById = id => Question.findById(id, includeUserLogin);
+exports.getById = id => getByIdWithVotes(Question, QuestionVote, id);
 
-exports.updateById = (id, question) => {
-  const options = {
-    where: {
-      id,
-    },
-    fields: ['title', 'description'],
-    returning: true,
-  };
-  return Question.update(question, options);
-};
+exports.updateById = (id, question) => update(Question, id, ['title', 'description'], question);
 
-exports.vote = (questionId, userId, isUpvote = true) =>
-  QuestionVote.upsert(
-    {
-      isUpvote,
-      questionId,
-      userId,
-    },
-    {
-      include: [User, Question],
-    },
-  );
+exports.vote = (id, userId, isUpvote = true) => vote(QuestionVote, Question, id, userId, isUpvote);
 
-exports.delete = questionId => Question.findById(questionId).then(question => question.destroy());
+exports.remove = id => remove(Question, id);

@@ -1,35 +1,29 @@
-const { Answer, Question, User } = require('../../models');
+const { Answer, Question, User, AnswerVote } = require('../../models');
+const { create, remove, update, vote, getByIdWithVotes, includeUserAndVotes } = require('../common');
 
 exports.create = (text, questionId, userId) =>
-  Answer.create(
+  create(
+    Answer,
     {
       text,
       questionId,
       userId,
     },
-    {
-      include: [Question, User],
-    },
+    [Question, User],
   );
 
-exports.getById = id => Answer.findById(id);
+exports.getById = id => getByIdWithVotes(Answer, AnswerVote, id);
 
 exports.getAllByQuestionId = questionId =>
   Answer.findAll({
     where: {
       questionId,
     },
+    ...includeUserAndVotes(AnswerVote),
   });
 
-exports.updateById = (id, answer) => {
-  const options = {
-    where: {
-      id,
-    },
-    fields: ['text'],
-    returning: true,
-  };
-  return Answer.update(answer, options);
-};
+exports.updateById = (id, answer) => update(Answer, id, ['text'], answer);
 
-exports.delete = answerId => Answer.findById(answerId).then(answer => answer.destroy());
+exports.remove = answerId => remove(Answer, answerId);
+
+exports.vote = (id, userId, isUpvote = true) => vote(AnswerVote, Answer, id, userId, isUpvote);
