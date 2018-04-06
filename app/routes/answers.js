@@ -41,7 +41,19 @@ exports.update = async ctx => {
   }
 };
 
-exports.delete = async ctx => {
+exports.upvote = async ctx => {
   const { id } = ctx.params;
-  ctx.body = await Answer.delete(id);
+  const vote = await Answer.vote(id, 1);
+  ctx.body = vote;
+};
+
+exports.downvote = async ctx => {
+  const { id } = ctx.params;
+  const vote = await Answer.vote(id, 1, false);
+  ctx.body = vote;
+};
+
+exports.remove = async ctx => {
+  const { id } = ctx.params;
+  ctx.body = await Answer.remove(id);
 };

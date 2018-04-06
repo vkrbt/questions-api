@@ -1,8 +1,8 @@
-const { Answer, Question, User } = require('../../models');
-const { createInstance, deleteInstance, updateInstance } = require('../common');
+const { Answer, Question, User, AnswerVote } = require('../../models');
+const { create, remove, update, vote, getByIdWithVotes, includeUserAndVotes } = require('../common');
 
 exports.create = (text, questionId, userId) =>
-  createInstance(
+  create(
     Answer,
     {
       text,
@@ -12,15 +12,18 @@ exports.create = (text, questionId, userId) =>
     [Question, User],
   );
 
-exports.getById = id => Answer.findById(id);
+exports.getById = id => getByIdWithVotes(Answer, AnswerVote, id);
 
 exports.getAllByQuestionId = questionId =>
   Answer.findAll({
     where: {
       questionId,
     },
+    ...includeUserAndVotes(AnswerVote),
   });
 
-exports.updateById = (id, answer) => updateInstance(Answer, id, ['text'], answer);
+exports.updateById = (id, answer) => update(Answer, id, ['text'], answer);
 
-exports.delete = answerId => deleteInstance(Answer, answerId);
+exports.remove = answerId => remove(Answer, answerId);
+
+exports.vote = (id, userId, isUpvote = true) => vote(AnswerVote, Answer, id, userId, isUpvote);

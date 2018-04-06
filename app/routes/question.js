@@ -51,7 +51,7 @@ exports.downvote = async ctx => {
   ctx.body = vote;
 };
 
-exports.delete = async ctx => {
+exports.remove = async ctx => {
   const { id } = ctx.params;
-  ctx.body = await Question.delete(id);;
+  ctx.body = await Question.remove(id);;
 };
