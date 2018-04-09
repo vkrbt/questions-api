@@ -32,6 +32,7 @@ router.delete('/answers/:id', answer.remove);
 router.post('/answers/:id/upvote', answer.upvote);
 router.post('/answers/:id/doenvote', answer.downvote);
 
-router.post('/tag/', tag.create)
+router.get('/tags/', tag.getAll);
+router.post('/tags/', tag.create);
 
 module.exports = router;

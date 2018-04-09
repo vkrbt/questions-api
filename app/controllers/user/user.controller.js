@@ -16,7 +16,7 @@ module.exports.getAll = () => {
       'login',
     ],
   };
-  return User.findAndCountAll(options);
+  return User.all(options);
 };
 
 module.exports.getByLogin = login => User.findOne({

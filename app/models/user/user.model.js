@@ -1,15 +1,15 @@
 const sequelize = require('../../db');
 const userFields = require('./user.fields');
-const { hasManyOptions } = require('../helpers/helpers');
+const { hasMany } = require('../helpers/helpers');
 
 module.exports = () => {
   const User = sequelize.define('user', userFields);
 
   User.associate = models => {
-    models.User.hasMany(models.Question, hasManyOptions);
-    models.User.hasMany(models.QuestionVote, hasManyOptions);
-    models.User.hasMany(models.Answer, hasManyOptions);
-    models.User.hasMany(models.AnswerVote, hasManyOptions);
+    models.User.hasMany(models.Question, hasMany);
+    models.User.hasMany(models.QuestionVote, hasMany);
+    models.User.hasMany(models.Answer, hasMany);
+    models.User.hasMany(models.AnswerVote, hasMany);
   };
 
   return User;
