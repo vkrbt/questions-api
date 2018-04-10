@@ -7,6 +7,7 @@ module.exports = () => {
 
   Tag.associate = models => {
     models.Tag.hasMany(models.QuestionTag, hasMany);
+    models.Tag.belongsToMany(models.Question, { through: models.QuestionTag, constraints: false });
   };
 
   return Tag;

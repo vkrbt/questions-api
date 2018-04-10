@@ -1,15 +1,15 @@
 const { User } = require('../models');
 
-const includeUserAndVotes = voteModel => ([
-    {
-      model: User,
-      attributes: ['login'],
-    },
-    {
-      model: voteModel,
-      attributes: ['isUpvote'],
-    },
-  ]);
+const includeUserAndVotes = voteModel => [
+  {
+    model: User,
+    attributes: ['login'],
+  },
+  {
+    model: voteModel,
+    attributes: ['isUpvote'],
+  },
+];
 
 exports.includeUserAndVotes = includeUserAndVotes;
 
@@ -22,7 +22,7 @@ exports.getByIdWithVotes = (model, voteModel, id) => getById(model, id, includeU
 exports.create = (model, data, includeModels) => model.create(data, includeModels);
 
 exports.remove = (model, where) =>
-  model.findAll({where}).then(instances => instances.map(instance => instance.destroy()));
+  model.findAll({ where }).then(instances => instances.map(instance => instance.destroy()));
 
 exports.removeById = (model, id) => model.findById(id).then(instance => instance.destroy());
 
