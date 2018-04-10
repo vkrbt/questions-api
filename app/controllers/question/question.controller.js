@@ -1,5 +1,5 @@
-const { Question, User, QuestionVote } = require('../../models');
-const { create, remove, update, vote, getByIdWithVotes } = require('../common');
+const { Question, User, QuestionVote, QuestionTag } = require('../../models');
+const { create, removeById, remove, update, vote, getByIdWithVotes } = require('../common');
 
 const includeUserLogin = {
   include: [
@@ -33,4 +33,8 @@ exports.updateById = (id, question) => update(Question, id, ['title', 'descripti
 
 exports.vote = (id, userId, isUpvote = true) => vote(QuestionVote, Question, id, userId, isUpvote);
 
-exports.remove = id => remove(Question, id);
+exports.remove = id => removeById(Question, id);
+
+exports.addTag = (questionId, tagId) => create(QuestionTag, { questionId, tagId });
+
+exports.removeTag = (questionId, tagId) => remove(QuestionTag, { questionId, tagId });

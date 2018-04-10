@@ -6,6 +6,7 @@ const questionVote = require('./questionVote/questionVote.model');
 const answer = require('./answer/answer.model');
 const answerVote = require('./answerVote/answerVote.model');
 const tag = require('./tag/tag.model');
+const questionTag = require('./questionTag/questionTag.model');
 
 const db = {
   User: user(),
@@ -14,6 +15,7 @@ const db = {
   Answer: answer(),
   AnswerVote: answerVote(),
   Tag: tag(),
+  QuestionTag: questionTag(),
 };
 
 Object.values(db).forEach(model => {

@@ -1,5 +1,5 @@
 const { Answer, Question, User, AnswerVote } = require('../../models');
-const { create, remove, update, vote, getByIdWithVotes, includeUserAndVotes } = require('../common');
+const { create, removeById, update, vote, getByIdWithVotes, includeUserAndVotes } = require('../common');
 
 exports.create = (text, questionId, userId) =>
   create(
@@ -24,6 +24,6 @@ exports.getAllByQuestionId = questionId =>
 
 exports.updateById = (id, answer) => update(Answer, id, ['text'], answer);
 
-exports.remove = answerId => remove(Answer, answerId);
+exports.remove = answerId => removeById(Answer, answerId);
 
 exports.vote = (id, userId, isUpvote = true) => vote(AnswerVote, Answer, id, userId, isUpvote);

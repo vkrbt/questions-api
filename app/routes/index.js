@@ -26,6 +26,9 @@ router.delete('/questions/:id', question.remove);
 router.post('/questions/:id/answers', answer.create);
 router.get('/questions/:id/answers', answer.getAllByQuestionId);
 
+router.post('/questions/:id/add-tag', question.addTag);
+router.post('/questions/:id/remove-tag', question.removeTag);
+
 router.get('/answers/:id', answer.getById);
 router.patch('/answers/:id', answer.update);
 router.delete('/answers/:id', answer.remove);
