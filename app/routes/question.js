@@ -21,9 +21,9 @@ exports.getAll = async ctx => {
 
 exports.getById = async ctx => {
   const { id } = ctx.params;
-  const questions = await Question.getById(id);
-  if (questions) {
-    ctx.body = questions;
+  const question = await Question.getById(id);
+  if (question) {
+    ctx.body = question;
   } else {
     ctx.status = 400;
   }
@@ -31,9 +31,9 @@ exports.getById = async ctx => {
 
 exports.update = async ctx => {
   const { id } = ctx.params;
-  const questions = await Question.updateById(id, ctx.request.body);
-  if (questions) {
-    ctx.body = questions;
+  const question = await Question.updateById(id, ctx.request.body);
+  if (question) {
+    ctx.body = question;
   } else {
     ctx.status = 400;
   }
@@ -53,5 +53,19 @@ exports.downvote = async ctx => {
 
 exports.remove = async ctx => {
   const { id } = ctx.params;
-  ctx.body = await Question.remove(id);;
+  ctx.body = await Question.remove(id);
+};
+
+exports.addTag = async ctx => {
+  const { id } = ctx.params;
+  const { tagId } = ctx.request.body;
+  const tag = await Question.addTag(id, tagId);
+  return tag;
+};
+
+exports.removeTag = async ctx => {
+  const { id } = ctx.params;
+  const { tagId } = ctx.request.body;
+  const tag = await Question.removeTag(id, tagId);
+  return tag;
 };
