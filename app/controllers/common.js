@@ -19,7 +19,7 @@ exports.getById = getById;
 
 exports.getByIdWithVotes = (model, voteModel, id) => getById(model, id, includeUserAndVotes(voteModel));
 
-exports.create = (model, data, includeModels) => model.create(data, includeModels);
+exports.create = (model, data, includeModels) => model.create(data, { ...includeModels, returning: true });
 
 exports.remove = (model, where) =>
   model.findAll({ where }).then(instances => instances.map(instance => instance.destroy()));
