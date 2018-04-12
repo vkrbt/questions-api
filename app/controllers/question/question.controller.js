@@ -1,4 +1,4 @@
-const { Question, User, QuestionVote, QuestionTag, Tag } = require('../../models');
+const { Question, User, QuestionVote, QuestionTag, Tag, Answer } = require('../../models');
 const { create, removeById, remove, update, vote, getById } = require('../common');
 
 const includeUserLogin = {
@@ -40,6 +40,9 @@ exports.getById = id =>
     {
       model: QuestionVote,
       attributes: ['isUpvote'],
+    },
+    {
+      model: Answer,
     },
   ]);
 
