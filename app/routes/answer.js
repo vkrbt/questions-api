@@ -43,13 +43,13 @@ exports.update = async ctx => {
 
 exports.upvote = async ctx => {
   const { id } = ctx.params;
-  const vote = await Answer.vote(id, 1);
+  const vote = await Answer.vote(id, ctx.state.user.id);
   ctx.body = vote;
 };
 
 exports.downvote = async ctx => {
   const { id } = ctx.params;
-  const vote = await Answer.vote(id, 1, false);
+  const vote = await Answer.vote(id, ctx.state.user.id, false);
   ctx.body = vote;
 };
 
