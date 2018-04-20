@@ -14,7 +14,7 @@ const createToken = ({ id, isAdmin }) =>
       { id, isAdmin },
       process.env.JWT_SECRET,
       {
-        expiresIn: 60,
+        expiresIn: 30 * 60,
       },
       (err, token) => {
         if (!err) {

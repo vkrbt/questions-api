@@ -10,11 +10,15 @@ exports.getAll = async ctx => {
 }
 
 exports.create = async ctx => {
-  const { name } = ctx.request.body;
-  const tag = await Tag.create(name);
-  if (tag) {
-    ctx.body = tag;
+  if (ctx.state.user.isAdmin) {
+    const { name } = ctx.request.body;
+    const tag = await Tag.create(name);
+    if (tag) {
+      ctx.body = tag;
+    } else {
+      ctx.status = 400;
+    }
   } else {
-    ctx.status = 400;
+    ctx.status = 403;
   }
 };

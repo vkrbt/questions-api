@@ -5,7 +5,9 @@ exports.register = async ctx => {
   const { login, password } = ctx.request.body;
   const user = await User.create(login, password);
   if (user) {
+    const token = await createToken(user);
     ctx.body = {
+      token,
       message: `User ${user.login} has been created.`,
     };
   } else {

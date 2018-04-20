@@ -1,8 +1,8 @@
 const Question = require('../controllers/question/question.controller');
 
 exports.create = async ctx => {
-  const { title, description, userId } = ctx.request.body;
-  const question = await Question.create(title, description, userId);
+  const { title, description } = ctx.request.body;
+  const question = await Question.create(title, description, ctx.state.user.id);
   if (question) {
     ctx.body = question;
   } else {
